@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './Navigation.css';
 
+// let newLocations = this.props.locations;
+
 export default class Navigation extends Component {
 	// Used for rendering
 	getClasses(ctx, index) {
@@ -23,12 +25,35 @@ export default class Navigation extends Component {
 		return index === this.props.locations.length - 1;
 	}
 
-	upPosition(index) {
-		console.log('position up', index);
+	constructor(props) {
+		super(props);
+		this.state = {
+			items: this.props.locations,
+		};
 	}
 
-	downPosition(index) {
-		console.log('position down', index);
+	moveDownArrayElement(from, to) {
+		let el = this.state.items[from];
+		let newArr = this.state.items;
+		console.log(newArr.splice(from, 1));
+		console.log(newArr.splice(to, 0, el));
+
+		this.setState({
+			items: newArr,
+		});
+	}
+
+	moveUpArrayElement(from, to) {
+		let el = this.state.items[from];
+		let newArr = this.state.items;
+		console.log(newArr.splice(from, 1));
+		console.log(newArr.splice(to, 0, el));
+
+		this.setState({
+			items: newArr,
+		});
+
+		return;
 	}
 
 	render() {
@@ -39,8 +64,8 @@ export default class Navigation extends Component {
 						<ul className="pl-0" data-testid="location-list">
 							{console.log(this.props.locations)}
 							{/* Use this li for rendering each location item as it contains all the data-testid attributes required for the tests to pass*/}
-							{this.props.locations &&
-								this.props.locations.map((lc, index) => (
+							{this.state.items &&
+								this.state.items.map((lc, index) => (
 									<li
 										key={'row' + index}
 										data-testid={'location-' + index}
@@ -67,7 +92,9 @@ export default class Navigation extends Component {
 												<button
 													className="icon-only small mx-0"
 													data-testid="up-button"
-													onClick={() => this.upPosition(index)}
+													onClick={() =>
+														this.moveDownArrayElement(index, index - 1)
+													}
 												>
 													<i className="material-icons">arrow_upward</i>
 												</button>
@@ -78,7 +105,9 @@ export default class Navigation extends Component {
 												<button
 													className="icon-only small mx-0"
 													data-testid="down-button"
-													onClick={() => this.downPosition(index)}
+													onClick={() =>
+														this.moveUpArrayElement(index, index + 1)
+													}
 												>
 													<i className="material-icons">arrow_downward</i>
 												</button>
