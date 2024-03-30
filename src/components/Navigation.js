@@ -3,7 +3,6 @@ import './Navigation.css';
 
 export default class Navigation extends Component {
 	// Used for rendering
-
 	getClasses(ctx, index) {
 		let classes = `material-icons ${ctx}`;
 		if (ctx === 'dots') {
@@ -22,6 +21,14 @@ export default class Navigation extends Component {
 	// Used for rendering
 	isLast(index) {
 		return index === this.props.locations.length - 1;
+	}
+
+	upPosition(index) {
+		console.log('position up', index);
+	}
+
+	downPosition(index) {
+		console.log('position down', index);
 	}
 
 	render() {
@@ -60,16 +67,18 @@ export default class Navigation extends Component {
 												<button
 													className="icon-only small mx-0"
 													data-testid="up-button"
+													onClick={() => this.upPosition(index)}
 												>
 													<i className="material-icons">arrow_upward</i>
 												</button>
 											)}
 
-											{console.log(index)}
+											{/* {console.log(index)} */}
 											{index === 4 ? null : (
 												<button
 													className="icon-only small mx-0"
 													data-testid="down-button"
+													onClick={() => this.downPosition(index)}
 												>
 													<i className="material-icons">arrow_downward</i>
 												</button>
