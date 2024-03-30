@@ -32,7 +32,6 @@ export default class Navigation extends Component {
 						<ul className="pl-0" data-testid="location-list">
 							{console.log(this.props.locations)}
 							{/* Use this li for rendering each location item as it contains all the data-testid attributes required for the tests to pass*/}
-
 							{this.props.locations &&
 								this.props.locations.map((lc, index) => (
 									<li
@@ -57,18 +56,24 @@ export default class Navigation extends Component {
 											</p>
 										</div>
 										<div>
-											<button
-												className="icon-only small mx-0"
-												data-testid="up-button"
-											>
-												<i className="material-icons">arrow_upward</i>
-											</button>
-											<button
-												className="icon-only small mx-0"
-												data-testid="down-button"
-											>
-												<i className="material-icons">arrow_downward</i>
-											</button>
+											{index === 0 ? null : (
+												<button
+													className="icon-only small mx-0"
+													data-testid="up-button"
+												>
+													<i className="material-icons">arrow_upward</i>
+												</button>
+											)}
+
+											{console.log(index)}
+											{index === 4 ? null : (
+												<button
+													className="icon-only small mx-0"
+													data-testid="down-button"
+												>
+													<i className="material-icons">arrow_downward</i>
+												</button>
+											)}
 										</div>
 									</li>
 								))}
